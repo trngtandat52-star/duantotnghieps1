@@ -18,6 +18,7 @@ const storeRoutes = require('./routes/storeRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const stripeController = require('./controllers/stripeController');
 
 const path = require('path');
 
@@ -26,9 +27,13 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({ origin: '*' }));
+app.use(morgan('dev'));
+
+// Stripe needs the unparsed request body to verify webhook signatures.
+app.post('/api/orders/stripe/webhook', express.raw({ type: 'application/json' }), stripeController.webhook);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
 
 // Phục vụ giao diện cửa hàng Frontend tĩnh
 app.use('/shop', express.static(path.join(__dirname, '../frontend')));

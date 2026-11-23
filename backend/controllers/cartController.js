@@ -1,4 +1,5 @@
 const pool = require('../config/db');
+const getVariantPrice = require('../utils/productPricing');
 
 async function readCart(userId, executor = pool) {
   const [rows] = await executor.query(
@@ -12,23 +13,10 @@ async function readCart(userId, executor = pool) {
     [userId]
   );
   return rows.map(({ variantsSize, variantSize, ...item }) => {
-    let sizes = [];
-    if (Array.isArray(variantsSize)) {
-      sizes = variantsSize;
-    } else if (variantsSize) {
-      sizes = JSON.parse(variantsSize);
-      if (!Array.isArray(sizes)) {
-        throw new Error('Dữ liệu biến thể kích thước của sản phẩm không hợp lệ.');
-      }
-    }
-
-    const sizeIndex = sizes.findIndex(size => String(size) === variantSize);
-    const multiplier = sizeIndex === 1 ? 1.15 : sizeIndex === 2 ? 1.35 : 1;
-    const basePrice = Number(item.price) || 0;
     return {
       ...item,
       variantSize,
-      price: Math.round((basePrice * multiplier) / 10000) * 10000
+      price: getVariantPrice(item.price, variantsSize, variantSize)
     };
   });
 }

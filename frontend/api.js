@@ -619,6 +619,26 @@ const LunihomeAPI = {
       return await res.json();
     },
 
+    async createStripeCheckout(orderData) {
+      const token = LunihomeAPI.auth.getToken();
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch(`${API_BASE_URL}/orders/stripe/checkout`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(orderData)
+      });
+      return await res.json();
+    },
+
+    async getStripeCheckoutStatus(sessionId) {
+      const res = await fetch(
+        `${API_BASE_URL}/orders/stripe/session/${encodeURIComponent(sessionId)}`
+      );
+      return await res.json();
+    },
+
     async getMyOrders() {
       const token = LunihomeAPI.auth.getToken();
       if (!token) return { success: false, message: 'Chưa đăng nhập' };

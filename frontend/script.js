@@ -920,6 +920,19 @@
       });
     });
 
+    const checkoutQuery = new URLSearchParams(window.location.search);
+    if (checkoutQuery.get('payment') === 'cancelled') {
+      const cancelledSessionId = checkoutQuery.get('session_id');
+      if (cancelledSessionId) {
+        try {
+          await window.LunihomeAPI.orders.getStripeCheckoutStatus(cancelledSessionId);
+        } catch (error) {
+          console.error('Không thể xác nhận hủy thanh toán Stripe:', error);
+        }
+      }
+      alert('Bạn đã hủy thanh toán. Đơn chưa thanh toán đã được hủy và giỏ hàng vẫn được giữ lại.');
+    }
+
     const applyCouponBtn = document.getElementById('applyCouponBtn');
     if (applyCouponBtn) {
       applyCouponBtn.addEventListener('click', async function () {
@@ -971,9 +984,20 @@
           })
         };
 
-        const response = await window.LunihomeAPI.orders.create(orderPayload);
+        const response = selectedPayment === 'Stripe'
+          ? await window.LunihomeAPI.orders.createStripeCheckout(orderPayload)
+          : await window.LunihomeAPI.orders.create(orderPayload);
         if (!response || !response.success) {
           alert(response && response.message ? response.message : 'Đặt hàng thất bại.');
+          return;
+        }
+
+        if (selectedPayment === 'Stripe') {
+          if (!response.checkoutUrl) {
+            alert('Không nhận được liên kết thanh toán. Vui lòng thử lại.');
+            return;
+          }
+          window.location.href = response.checkoutUrl;
           return;
         }
 
@@ -1053,8 +1077,9 @@
     }
   };
 
-  const renderThankYouPage = function () {
+  const renderThankYouPage = async function () {
     const query = new URLSearchParams(window.location.search);
+    const sessionId = query.get('session_id');
     const orderCode = query.get('code') || 'LUNI';
     const total = query.get('total') || '0';
     const payment = query.get('payment') || 'COD';
@@ -1062,6 +1087,40 @@
     const codeNode = document.getElementById('thankOrderCode');
     const totalNode = document.getElementById('thankOrderTotal');
     const paymentNode = document.getElementById('thankOrderPayment');
+    const messageNode = document.querySelector('.auth-card > p');
+
+    if (sessionId) {
+      if (messageNode) messageNode.textContent = 'Đang xác nhận thanh toán với Stripe...';
+      try {
+        let result;
+        for (let attempt = 0; attempt < 5; attempt += 1) {
+          result = await window.LunihomeAPI.orders.getStripeCheckoutStatus(sessionId);
+          if (!result.success || result.paymentStatus !== 'pending') break;
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+        }
+
+        if (!result || !result.success) {
+          throw new Error(result && result.message ? result.message : 'Không thể xác nhận thanh toán.');
+        }
+        if (codeNode) codeNode.textContent = result.orderCode;
+        if (totalNode) totalNode.textContent = formatCurrency(Number(result.totalAmount) || 0);
+        if (paymentNode) paymentNode.textContent = 'Stripe';
+
+        if (result.paymentStatus === 'paid') {
+          if (messageNode) messageNode.textContent = 'Thanh toán thành công. Đơn hàng của bạn đã được tiếp nhận.';
+          localStorage.removeItem('lunihome_selected_coupon');
+          await window.LunihomeAPI.cart.clear();
+        } else if (result.paymentStatus === 'failed') {
+          if (messageNode) messageNode.textContent = 'Thanh toán chưa thành công. Vui lòng liên hệ cửa hàng để được hỗ trợ.';
+        } else if (messageNode) {
+          messageNode.textContent = 'Thanh toán đang được xác nhận. Vui lòng kiểm tra lại lịch sử đơn hàng sau ít phút.';
+        }
+      } catch (error) {
+        console.error('Lỗi xác nhận thanh toán Stripe:', error);
+        if (messageNode) messageNode.textContent = error.message || 'Không thể xác nhận thanh toán.';
+      }
+      return;
+    }
 
     if (codeNode) codeNode.textContent = orderCode;
     if (totalNode) totalNode.textContent = formatCurrency(Number(total || 0));

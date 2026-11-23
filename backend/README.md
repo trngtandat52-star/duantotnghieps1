@@ -39,7 +39,25 @@ Mở trình duyệt truy cập: **`http://localhost:5000`** để xem **Dashboar
 
 ---
 
-## 🔐 2. Tài khoản thử nghiệm có sẵn
+## 💳 2. Cấu hình thanh toán Stripe
+
+Thanh toán trực tuyến dùng Stripe Checkout (thẻ) với số tiền VND. Khóa bí mật chỉ được đặt ở backend:
+
+1. Tạo `backend/.env` từ [`backend/.env.example`](./.env.example).
+2. Tạo tài khoản Stripe và lấy khóa test trong Dashboard → Developers → API keys; điền `STRIPE_SECRET_KEY`.
+3. Chạy Stripe CLI để chuyển webhook về máy:
+   ```bash
+   stripe listen --forward-to localhost:5000/api/orders/stripe/webhook
+   ```
+4. Sao chép webhook signing secret CLI hiển thị (`whsec_...`) vào `STRIPE_WEBHOOK_SECRET`.
+5. Đặt `FRONTEND_BASE_URL` thành địa chỉ đang phục vụ cửa hàng (mặc định `http://localhost:3000`).
+6. Khởi động backend và kiểm thử bằng thẻ test `4242 4242 4242 4242`, ngày hết hạn trong tương lai, CVC bất kỳ.
+
+Không commit `backend/.env` hoặc dùng khóa test trong production. Thanh toán chỉ được đánh dấu thành công sau khi Stripe xác nhận; các phiên hết hạn sẽ hủy đơn và hoàn lại tồn kho. Khả năng nhận thanh toán thật phụ thuộc quốc gia và trạng thái tài khoản Stripe của cửa hàng.
+
+---
+
+## 🔐 3. Tài khoản thử nghiệm có sẵn
 
 | Vai trò | Email | Mật khẩu | Chức năng |
 |---|---|---|---|
@@ -48,7 +66,7 @@ Mở trình duyệt truy cập: **`http://localhost:5000`** để xem **Dashboar
 
 ---
 
-## 📡 3. Danh sách đầy đủ các Endpoint RESTful API
+## 📡 4. Danh sách đầy đủ các Endpoint RESTful API
 
 ### 🔑 A. Xác thực & Người dùng (`/api/auth`)
 | Method | Endpoint | Yêu cầu Header | Mô tả |
@@ -85,7 +103,10 @@ Mở trình duyệt truy cập: **`http://localhost:5000`** để xem **Dashboar
 ### 🛒 D. Đơn hàng & Thanh toán (`/api/orders`, `/api/coupons`)
 | Method | Endpoint | Yêu cầu Header | Mô tả |
 |---|---|---|---|
-| `POST` | `/api/orders` | Tùy chọn `Bearer` | Tạo đơn hàng mới (họ tên, sđt, địa chỉ, phương thức thanh toán, danh sách hàng, mã giảm giá) |
+| `POST` | `/api/orders` | Tùy chọn `Bearer` | Tạo đơn COD (họ tên, sđt, địa chỉ, danh sách hàng, mã giảm giá) |
+| `POST` | `/api/orders/stripe/checkout` | Tùy chọn `Bearer` | Tạo đơn Stripe Checkout; giá và tồn kho được xác thực từ CSDL |
+| `GET` | `/api/orders/stripe/session/:sessionId` | Không | Xác nhận trạng thái thanh toán khi trở về từ Stripe |
+| `POST` | `/api/orders/stripe/webhook` | Stripe signature | Webhook cập nhật đơn đã thanh toán hoặc phiên hết hạn |
 | `GET` | `/api/orders/my-orders` | `Bearer <token>` | Lấy toàn bộ lịch sử đơn hàng của người dùng đăng nhập |
 | `GET` | `/api/orders/:code` | Tùy chọn | Xem chi tiết đơn hàng theo mã đơn (vd: `LUNI-20261014`) |
 | `PUT` | `/api/orders/:id/cancel` | `Bearer <token>` | Hủy đơn hàng đang chờ xử lý |
@@ -121,7 +142,7 @@ Tất cả endpoint trong mục này yêu cầu JWT trong header `Authorization:
 
 ---
 
-## 💻 4. Tích hợp sẵn với Frontend HTML
+## 💻 5. Tích hợp sẵn với Frontend HTML
 Thư mục gốc đã được trang bị file **`api.js`**:
 - Tự động tích hợp đăng nhập tại [`dang-nhap.html`](file:///c:/Users/Admin/Downloads/duantotnghiep/dang-nhap.html)
 - Tự động tích hợp đăng ký tại [`dang-ky.html`](file:///c:/Users/Admin/Downloads/duantotnghiep/dang-ky.html)

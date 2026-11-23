@@ -25,6 +25,14 @@ exports.createOrder = async (req, res) => {
       couponCode = null
     } = req.body;
 
+    if (paymentMethod !== 'COD') {
+      await connection.rollback();
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng sử dụng luồng thanh toán tương ứng với phương thức đã chọn.'
+      });
+    }
+
     if (!customerName || !customerPhone || !shippingAddress) {
       await connection.rollback();
       return res.status(400).json({
@@ -210,7 +218,10 @@ exports.getMyOrders = async (req, res) => {
     const userId = req.user.id;
 
     const [orders] = await pool.query(
-      `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC`,
+      `SELECT * FROM orders
+       WHERE user_id = ?
+       AND NOT (payment_method = 'Stripe' AND payment_status = 'pending')
+       ORDER BY created_at DESC`,
       [userId]
     );
 
@@ -343,11 +354,12 @@ exports.cancelOrder = async (req, res) => {
 exports.getAllOrders = async (req, res) => {
   try {
     const { status } = req.query;
-    let query = 'SELECT * FROM orders';
+    let query = `SELECT * FROM orders
+      WHERE NOT (payment_method = 'Stripe' AND payment_status = 'pending')`;
     const params = [];
 
     if (status) {
-      query += ' WHERE order_status = ?';
+      query += ' AND order_status = ?';
       params.push(status);
     }
 

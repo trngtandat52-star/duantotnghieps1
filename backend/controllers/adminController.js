@@ -13,11 +13,16 @@ exports.getStats = async (req, res) => {
     const totalRevenue = Number(revResult[0]?.total_revenue || 0);
 
     // 2. Thống kê đơn hàng
-    const [orderCountResult] = await pool.query(`SELECT COUNT(*) AS total_orders FROM orders`);
+    const [orderCountResult] = await pool.query(
+      `SELECT COUNT(*) AS total_orders FROM orders
+       WHERE NOT (payment_method = 'Stripe' AND payment_status = 'pending')`
+    );
     const totalOrders = orderCountResult[0]?.total_orders || 0;
 
     const [pendingCountResult] = await pool.query(
-      `SELECT COUNT(*) AS pending_orders FROM orders WHERE order_status = 'pending'`
+      `SELECT COUNT(*) AS pending_orders FROM orders
+       WHERE order_status = 'pending'
+       AND NOT (payment_method = 'Stripe' AND payment_status = 'pending')`
     );
     const pendingOrders = pendingCountResult[0]?.pending_orders || 0;
 
@@ -42,13 +47,16 @@ exports.getStats = async (req, res) => {
     const [recentOrders] = await pool.query(
       `SELECT id, order_code, customer_name, customer_phone, total_amount, payment_method, payment_status, order_status, created_at 
        FROM orders 
+       WHERE NOT (payment_method = 'Stripe' AND payment_status = 'pending')
        ORDER BY created_at DESC 
        LIMIT 8`
     );
 
     // 7. Cơ cấu trạng thái đơn hàng
     const [statusBreakdown] = await pool.query(
-      `SELECT order_status, COUNT(*) as count FROM orders GROUP BY order_status`
+      `SELECT order_status, COUNT(*) as count FROM orders
+       WHERE NOT (payment_method = 'Stripe' AND payment_status = 'pending')
+       GROUP BY order_status`
     );
 
     return res.json({

@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
+const stripeController = require('../controllers/stripeController');
 const { protect, optionalAuth, adminOnly } = require('../middlewares/authMiddleware');
+
+// Stripe Checkout and status routes must be registered before /:code.
+router.post('/stripe/checkout', optionalAuth, stripeController.createCheckoutSession);
+router.get('/stripe/session/:sessionId', stripeController.getCheckoutStatus);
 
 // Tạo đơn hàng (cho phép cả khách vãng lai và thành viên)
 router.post('/', optionalAuth, orderController.createOrder);
