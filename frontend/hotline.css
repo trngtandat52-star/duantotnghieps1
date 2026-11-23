@@ -1,0 +1,250 @@
+/* ====================================================
+   Floating Hotline Slide-out Widget - Luxury Styling
+   ==================================================== */
+
+.luni-hotline-wrap {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+}
+
+/* 1. Nút gọi tròn chính với hiệu ứng sóng lan tỏa */
+.luni-hotline-btn-wrap {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* Các vòng sóng lan tỏa (Ripple Waves) */
+.luni-hotline-ripple {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(225, 29, 72, 0.45);
+  animation: luniRippleWave 1.8s infinite ease-out;
+  pointer-events: none;
+}
+
+.luni-hotline-ripple:nth-child(2) {
+  inset: -12px;
+  border-color: rgba(225, 29, 72, 0.25);
+  animation-delay: 0.5s;
+}
+
+/* Nút hình tròn kích hoạt trượt */
+.luni-hotline-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  border: 2.5px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.45), 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 10;
+  border-style: solid;
+}
+
+.luni-hotline-circle:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 12px 30px rgba(225, 29, 72, 0.55);
+}
+
+.luni-hotline-circle:active {
+  transform: scale(0.96);
+}
+
+/* Rung chuông điện thoại */
+.luni-phone-vibrate {
+  animation: luniPhoneShake 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+/* 2. Thanh thông tin trượt ra (Slide-Out Slider) */
+.luni-hotline-slider {
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-15px);
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  background: #ffffff;
+  border-radius: 0 35px 35px 0;
+  margin-left: -24px; /* Lồng nhẹ ra sau nút tròn */
+  padding: 0;
+  box-shadow: 0 10px 30px rgba(43, 37, 31, 0.14), 0 0 0 1px #eedfca;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease,
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.3s ease;
+  z-index: 5;
+}
+
+/* KHI CLICK VÀO: TRƯỢT MỞ RỘNG RA */
+.luni-hotline-wrap.luni-open .luni-hotline-slider {
+  max-width: 420px;
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  padding: 8px 16px 8px 36px;
+}
+
+/* Khối số điện thoại */
+.luni-hotline-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.luni-hotline-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #e11d48;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.luni-hotline-label .luni-live-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.luni-hotline-number {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+  margin-top: 1px;
+  transition: color 0.2s ease;
+}
+
+.luni-hotline-info:hover .luni-hotline-number {
+  color: #e11d48;
+}
+
+/* Các nút hành động bên trong thanh trượt */
+.luni-hotline-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.luni-hotline-btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.luni-hotline-btn-action.btn-call {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+}
+
+.luni-hotline-btn-action.btn-call:hover {
+  background: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+  transform: translateY(-1px);
+}
+
+.luni-hotline-btn-action.btn-zalo {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.luni-hotline-btn-action.btn-zalo:hover {
+  background: #15803d;
+  color: #ffffff;
+  border-color: #15803d;
+  transform: translateY(-1px);
+}
+
+.luni-hotline-close-btn {
+  background: transparent;
+  border: none;
+  color: #a4998f;
+  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.luni-hotline-close-btn:hover {
+  background: #f7efe5;
+  color: #1e293b;
+}
+
+/* Hiệu ứng hoạt họa */
+@keyframes luniRippleWave {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes luniPhoneShake {
+  0%, 100% { transform: rotate(0); }
+  5%, 15%, 25% { transform: rotate(-16deg); }
+  10%, 20%, 30% { transform: rotate(16deg); }
+  35% { transform: rotate(0); }
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .luni-hotline-wrap {
+    bottom: 16px;
+    left: 16px;
+  }
+  .luni-hotline-wrap.luni-open .luni-hotline-slider {
+    max-width: calc(100vw - 110px);
+    padding: 6px 12px 6px 30px;
+  }
+  .luni-hotline-btn-action span {
+    display: none; /* Chỉ hiện icon trên điện thoại nhỏ để gọn gàng */
+  }
+}

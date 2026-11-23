@@ -1,0 +1,581 @@
+/* ====================================================
+   LuniAI Customer Support Chat Widget - Luxury Styling
+   ==================================================== */
+
+:root {
+  --chat-gold: #c99c42;
+  --chat-gold-hover: #b58636;
+  --chat-gold-light: rgba(201, 156, 66, 0.12);
+  --chat-dark: #1e293b;
+  --chat-bg: #fffdfa;
+  --chat-border: #eedfca;
+  --chat-text: #2b251f;
+  --chat-muted: #72675f;
+}
+
+/* 1. Floating Action Trigger Button */
+.luni-chat-fab-wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.luni-chat-tooltip {
+  background: #ffffff;
+  color: var(--chat-text);
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(43, 37, 31, 0.15), 0 0 0 1px var(--chat-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+  animation: luniFloatIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.luni-chat-tooltip:hover {
+  transform: translateY(-2px);
+}
+
+.luni-chat-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 22px;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  border-right: 1px solid var(--chat-border);
+  border-bottom: 1px solid var(--chat-border);
+}
+
+.luni-chat-tooltip-close {
+  background: transparent;
+  border: none;
+  color: #a4998f;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+
+.luni-chat-tooltip-close:hover {
+  color: var(--chat-text);
+}
+
+.luni-chat-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d6a963, #b58636);
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(181, 134, 54, 0.45), 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  outline: none;
+}
+
+.luni-chat-fab:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 12px 30px rgba(181, 134, 54, 0.55);
+}
+
+.luni-chat-fab:active {
+  transform: scale(0.96);
+}
+
+.luni-chat-status-pulse {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #10b981;
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+}
+
+.luni-chat-status-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.5);
+  animation: luniPulse 2s infinite;
+}
+
+/* 2. Chat Window Container */
+.luni-chat-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 390px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 120px);
+  background: var(--chat-bg);
+  border: 1px solid var(--chat-border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(43, 37, 31, 0.22), 0 0 0 1px rgba(201, 156, 66, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 99999;
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  animation: luniScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: bottom right;
+}
+
+.luni-chat-window.luni-hidden {
+  display: none;
+}
+
+/* 3. Header */
+.luni-chat-header {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #ffffff;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--chat-gold);
+}
+
+.luni-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.luni-chat-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #d6a963, #b58636);
+  color: #2b251f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(214, 169, 99, 0.35);
+  position: relative;
+}
+
+.luni-chat-avatar-status {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 11px;
+  height: 11px;
+  background: #10b981;
+  border: 2px solid #1e293b;
+  border-radius: 50%;
+}
+
+.luni-chat-title {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #f8fafc;
+}
+
+.luni-chat-title span.luni-badge {
+  background: var(--chat-gold);
+  color: #1e293b;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.luni-chat-subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.luni-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.luni-chat-btn-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #cbd5e1;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.luni-chat-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+/* 4. Messages Container */
+.luni-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #fdfaf6;
+  scroll-behavior: smooth;
+}
+
+.luni-chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+.luni-chat-body::-webkit-scrollbar-thumb {
+  background: #e2d4c0;
+  border-radius: 10px;
+}
+
+.luni-msg-row {
+  display: flex;
+  gap: 10px;
+  animation: luniFadeUp 0.25s ease-out;
+}
+
+.luni-msg-row.luni-bot {
+  align-items: flex-start;
+}
+
+.luni-msg-row.luni-user {
+  justify-content: flex-end;
+}
+
+.luni-msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #eedfca;
+  color: #b58636;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.luni-msg-bubble {
+  max-width: 82%;
+  padding: 11px 15px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.luni-msg-row.luni-bot .luni-msg-bubble {
+  background: #ffffff;
+  color: var(--chat-text);
+  border: 1px solid var(--chat-border);
+  border-top-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(43, 37, 31, 0.04);
+}
+
+.luni-msg-row.luni-user .luni-msg-bubble {
+  background: linear-gradient(135deg, #c99c42, #b58636);
+  color: #ffffff;
+  border-top-right-radius: 4px;
+  box-shadow: 0 4px 12px rgba(181, 134, 54, 0.25);
+  font-weight: 500;
+}
+
+.luni-msg-time {
+  font-size: 10px;
+  color: #a4998f;
+  margin-top: 4px;
+  display: block;
+}
+
+.luni-msg-row.luni-user .luni-msg-time {
+  text-align: right;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Product Recommendation Card inside Chat */
+.luni-chat-product-card {
+  background: #ffffff;
+  border: 1px solid var(--chat-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+}
+
+.luni-chat-product-card:hover {
+  border-color: var(--chat-gold);
+  box-shadow: 0 4px 14px rgba(201, 156, 66, 0.18);
+  transform: translateY(-1px);
+}
+
+.luni-chat-product-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f1ede7;
+  flex-shrink: 0;
+}
+
+.luni-chat-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.luni-chat-product-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--chat-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.luni-chat-product-price {
+  font-size: 13px;
+  font-weight: 800;
+  color: #b58636;
+  margin-top: 2px;
+}
+
+.luni-chat-product-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--chat-gold);
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Coupon Badge inside Chat */
+.luni-chat-coupon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201, 156, 66, 0.1);
+  border: 1px dashed var(--chat-gold);
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8c631e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.luni-chat-coupon:hover {
+  background: var(--chat-gold);
+  color: #ffffff;
+}
+
+/* Typing Indicator Animation */
+.luni-typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid var(--chat-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.luni-typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #c99c42;
+  border-radius: 50%;
+  animation: luniTyping 1.4s infinite ease-in-out;
+}
+.luni-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.luni-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* 5. Quick Suggestion Chips */
+.luni-chat-suggestions {
+  padding: 8px 14px 4px 14px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #fdfaf6;
+  border-top: 1px solid rgba(238, 223, 202, 0.6);
+}
+
+.luni-chat-suggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.luni-chip {
+  background: #ffffff;
+  border: 1px solid var(--chat-border);
+  color: var(--chat-text);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.luni-chip:hover {
+  background: #f7efe5;
+  border-color: var(--chat-gold);
+  color: var(--chat-gold-hover);
+  transform: translateY(-1px);
+}
+
+/* 6. Input Area */
+.luni-chat-input-box {
+  padding: 12px 14px;
+  background: #ffffff;
+  border-top: 1px solid var(--chat-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.luni-chat-input {
+  flex: 1;
+  background: #fffdfa;
+  border: 1px solid var(--chat-border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--chat-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.luni-chat-input:focus {
+  border-color: var(--chat-gold);
+  box-shadow: 0 0 0 3px rgba(201, 156, 66, 0.15);
+}
+
+.luni-chat-input::placeholder {
+  color: #a4998f;
+}
+
+.luni-chat-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #d6a963, #b58636);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(181, 134, 54, 0.3);
+  flex-shrink: 0;
+}
+
+.luni-chat-send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(181, 134, 54, 0.45);
+}
+
+.luni-chat-send-btn:active {
+  transform: scale(0.95);
+}
+
+.luni-chat-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animations */
+@keyframes luniFloatIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes luniScaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes luniFadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes luniPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes luniTyping {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .luni-chat-window {
+    right: 12px;
+    bottom: 84px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 100px);
+    border-radius: 16px;
+  }
+  .luni-chat-fab-wrap {
+    right: 16px;
+    bottom: 16px;
+  }
+}

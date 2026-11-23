@@ -1,0 +1,17 @@
+{
+  "name": "lunihome-frontend",
+  "version": "1.0.0",
+  "description": "Giao diện khách hàng LuniHome Storefront (HTML/CSS/JS)",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "keywords": [
+    "lunihome",
+    "frontend",
+    "storefront"
+  ],
+  "author": "LuniHome Dev Team",
+  "license": "ISC"
+}

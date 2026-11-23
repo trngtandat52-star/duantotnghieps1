@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lunihome - Website bán đèn trang trí hiện đại.">
+  <title>Lunihome | Đèn trang trí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="ai-chat.css">
+  <link rel="stylesheet" href="hotline.css">
+</head>
+<body class="home-page">
+  <div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span><i class="fa-solid fa-truck-fast"></i> Giao hàng toàn quốc</span><span><i class="fa-solid fa-shield-heart"></i> Sản phẩm chính hãng</span></div><div class="topbar-right"><span><i class="fa-solid fa-phone"></i> 0901 234 567</span><span>Hỗ trợ 08:00 - 21:00</span></div></div></div>
+
+  <header class="header"><div class="container header-main">
+    <a class="logo" href="index.html"><img src="logo.png" alt="Lunihome" class="logo-img"></a>
+    <div class="search-box"><form id="searchForm" action="tim-kiem.html" method="get"><input type="search" name="q" id="searchInput" placeholder="Tìm kiếm đèn trang trí, đèn ngủ, đèn bàn..." aria-label="Tìm kiếm sản phẩm"><button type="submit" aria-label="Tìm kiếm"><i class="fa-solid fa-magnifying-glass"></i></button></form></div>
+    <div class="header-actions"><a class="action-link" href="gio-hang.html" title="Giỏ hàng"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span></a><div class="account-wrap" id="accountWrap"><button class="action-link" id="accountBtn" type="button" aria-expanded="false" title="Tài khoản"><i class="fa-regular fa-user"></i></button><div class="account-menu"><a href="dang-nhap.html"><i class="fa-solid fa-right-to-bracket"></i>Đăng nhập</a><a href="dang-ky.html"><i class="fa-solid fa-user-plus"></i>Đăng ký</a><a href="lich-su-don-hang.html"><i class="fa-solid fa-receipt"></i>Lịch sử đơn hàng</a><a href="yeu-thich.html"><i class="fa-regular fa-heart"></i>Sản phẩm yêu thích</a></div></div><div class="hello"><small>Xin chào</small><strong>Khách hàng</strong></div><button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button></div>
+  </div></header>
+
+  <nav class="nav" id="mainNav"><div class="container nav-inner">
+    <div class="nav-item active"><a class="nav-link" href="index.html">Trang chủ</a></div>
+    <div class="nav-item"><a class="nav-link" href="#" data-mobile-dropdown>Danh mục <i class="fa-solid fa-chevron-down"></i></a><div class="dropdown"><a href="danh-muc.html?slug=den-tran">Đèn trần</a><a href="danh-muc.html?slug=den-tha">Đèn thả</a><a href="danh-muc.html?slug=den-ban">Đèn bàn</a><a href="danh-muc.html?slug=den-tuong">Đèn tường</a><a href="danh-muc.html?slug=den-ngu">Đèn ngủ</a><a href="danh-muc.html?slug=den-decor">Đèn decor</a></div></div>
+    <div class="nav-item"><a class="nav-link" href="#" data-mobile-dropdown>Bài viết <i class="fa-solid fa-chevron-down"></i></a><div class="dropdown"><a href="bai-viet.html?danh_muc=tu-van">Tư vấn chiếu sáng</a><a href="bai-viet.html?danh_muc=trang-tri">Trang trí nhà</a><a href="bai-viet.html?danh_muc=xu-huong">Xu hướng đèn</a><a href="bai-viet.html?danh_muc=meo-hay">Mẹo hay</a></div></div>
+    <div class="nav-item"><a class="nav-link" href="gioi-thieu.html">Giới thiệu</a></div><div class="nav-item"><a class="nav-link" href="lien-he.html">Liên hệ</a></div><div class="nav-item"><a class="nav-link" href="he-thong-cua-hang.html">Hệ thống cửa hàng</a></div><div class="nav-item"><a class="nav-link" href="chinh-sach.html">Chính sách</a></div><div class="nav-item"><a class="nav-link" href="huong-dan-mua-hang.html">Hướng dẫn mua hàng</a></div>
+  </div></nav>
+
+  <main>
+    <section class="hero" aria-label="Banner Lunihome"><div class="container"><div class="hero-card" data-banner-carousel>
+      <div class="hero-viewport"><div class="hero-track" aria-live="polite">
+        <article class="hero-slide">
+          <img class="hero-image" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=85" alt="">
+          <div class="hero-content"><div class="hero-tag"><i class="fa-solid fa-sparkles"></i>Lunihome Collection</div><h1>Thắp sáng không gian, nâng tầm phong cách.</h1><p>Khám phá bộ sưu tập đèn trang trí hiện đại cho phòng khách, phòng ngủ, bàn làm việc và những góc decor yêu thích.</p><a class="btn btn-primary" href="san-pham.html">Khám phá sản phẩm <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+      </div></div>
+      <button class="hero-control hero-prev" type="button" aria-label="Banner trước" hidden><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="hero-control hero-next" type="button" aria-label="Banner tiếp theo" hidden><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="hero-dots" aria-label="Chọn banner" hidden></div>
+    </div></div></section>
+
+    <section><div class="container"><div class="section-head"><div><small>Khám phá</small><h2>Danh mục sản phẩm</h2><p>Lựa chọn chiếc đèn phù hợp cho từng không gian.</p></div><a class="view-all" href="san-pham.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div><div class="category-grid">
+      <a class="category-card" href="danh-muc.html?slug=den-tran"><div class="category-image"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Đèn trần" loading="lazy"></div><h3>Đèn trần</h3></a>
+      <a class="category-card" href="danh-muc.html?slug=den-tha"><div class="category-image"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="Đèn thả" loading="lazy"></div><h3>Đèn thả</h3></a>
+      <a class="category-card" href="danh-muc.html?slug=den-ban"><div class="category-image"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80" alt="Đèn bàn" loading="lazy"></div><h3>Đèn bàn</h3></a>
+      <a class="category-card" href="danh-muc.html?slug=den-tuong"><div class="category-image"><img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80" alt="Đèn tường" loading="lazy"></div><h3>Đèn tường</h3></a>
+      <a class="category-card" href="danh-muc.html?slug=den-ngu"><div class="category-image"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Đèn ngủ" loading="lazy"></div><h3>Đèn ngủ</h3></a>
+      <a class="category-card" href="danh-muc.html?slug=den-decor"><div class="category-image"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="Đèn decor" loading="lazy"></div><h3>Đèn decor</h3></a>
+    </div></div></section>
+
+    <section><div class="container"><div class="section-head"><div><small>Mới về</small><h2>Sản phẩm mới</h2><p>Những mẫu đèn mới nhất tại Lunihome.</p></div><a class="view-all" href="san-pham.html?sort=newest">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div><div class="product-grid">
+      <div class="db-loading" style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted);"><i class="fa-solid fa-spinner fa-spin" style="font-size: 28px; color: var(--primary);"></i><p style="margin-top: 10px; font-weight: 500;">Đang kết nối tải sản phẩm từ CSDL MySQL...</p></div>
+    </div></div></section>
+
+    <section><div class="container"><div class="section-head"><div><small>Thương hiệu</small><h2>Đối tác & thương hiệu</h2><p>Các thương hiệu chiếu sáng được lựa chọn tại Lunihome.</p></div><a class="view-all" href="thuong-hieu.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div><div class="brand-grid">
+      <a class="brand-card" href="thuong-hieu.html?slug=lumihome"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=LumiHome" alt="LumiHome" loading="lazy"></a><a class="brand-card" href="thuong-hieu.html?slug=philips"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=Philips" alt="Philips" loading="lazy"></a><a class="brand-card" href="thuong-hieu.html?slug=rang-dong"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=R%E1%BA%A1ng+%C4%90%C3%B4ng" alt="Rạng Đông" loading="lazy"></a><a class="brand-card" href="thuong-hieu.html?slug=panasonic"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=Panasonic" alt="Panasonic" loading="lazy"></a><a class="brand-card" href="thuong-hieu.html?slug=duhal"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=Duhal" alt="Duhal" loading="lazy"></a><a class="brand-card" href="thuong-hieu.html?slug=paragon"><img src="https://placehold.co/180x70/F7EFE5/2B251F?text=Paragon" alt="Paragon" loading="lazy"></a>
+    </div></div></section>
+
+    <section><div class="container"><div class="section-head"><div><small>Được quan tâm</small><h2>Sản phẩm xem nhiều</h2><p>Những mẫu đèn đang được khách hàng quan tâm.</p></div><a class="view-all" href="san-pham.html?sort=popular">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div><div class="product-grid">
+      <div class="db-loading" style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted);"><i class="fa-solid fa-spinner fa-spin" style="font-size: 28px; color: var(--primary);"></i><p style="margin-top: 10px; font-weight: 500;">Đang kết nối tải sản phẩm từ CSDL MySQL...</p></div>
+    </div></div></section>
+
+    <section><div class="container"><div class="section-head"><div><small>Blog Lunihome</small><h2>Bài viết mới</h2><p>Gợi ý chọn đèn và trang trí không gian đẹp hơn.</p></div><a class="view-all" href="bai-viet.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div><div class="post-grid">
+      <article class="post-card"><a class="post-image" href="chi-tiet-bai-viet.html?slug=cach-chon-den-cho-phong-khach"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Cách chọn đèn cho phòng khách" loading="lazy"></a><div class="post-content"><small>Tư vấn chiếu sáng</small><h3><a href="chi-tiet-bai-viet.html?slug=cach-chon-den-cho-phong-khach">Cách chọn đèn trang trí phù hợp cho phòng khách</a></h3><p>Một vài nguyên tắc đơn giản để chọn kiểu dáng, màu ánh sáng và công suất phù hợp với phòng khách hiện đại.</p></div></article>
+      <article class="post-card"><a class="post-image" href="chi-tiet-bai-viet.html?slug=bi-quyet-chon-den-phong-ngu"><img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80" alt="Bí quyết chọn đèn phòng ngủ" loading="lazy"></a><div class="post-content"><small>Trang trí nhà</small><h3><a href="chi-tiet-bai-viet.html?slug=bi-quyet-chon-den-phong-ngu">Bí quyết chọn đèn phòng ngủ ấm áp và thư giãn</a></h3><p>Từ nhiệt độ màu đến vị trí lắp đặt, những lựa chọn đúng sẽ giúp phòng ngủ trở nên nhẹ nhàng và dễ chịu hơn.</p></div></article>
+      <article class="post-card"><a class="post-image" href="chi-tiet-bai-viet.html?slug=xu-huong-den-trang-tri-2026"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80" alt="Xu hướng đèn trang trí 2026" loading="lazy"></a><div class="post-content"><small>Xu hướng đèn</small><h3><a href="chi-tiet-bai-viet.html?slug=xu-huong-den-trang-tri-2026">Xu hướng đèn trang trí nổi bật cho không gian hiện đại</a></h3><p>Cùng khám phá những phong cách đèn đang được yêu thích cho nhà ở, quán cà phê và góc làm việc.</p></div></article>
+    </div></div></section>
+  </main>
+
+  <footer><div class="container footer-inner"><div><div class="footer-logo"><a href="index.html"><img src="logo.png" alt="Lunihome" class="footer-logo-img"></a></div><p class="footer-desc">Decorative Lighting • Thắp sáng không gian sống</p><div class="footer-contact"><div><i class="fa-solid fa-location-dot"></i> 123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh</div><div><i class="fa-solid fa-envelope"></i> hello@lunihome.vn</div><div><i class="fa-solid fa-phone"></i> 0901 234 567</div></div></div></div><div class="copyright">© 2026 Lunihome. All rights reserved.</div></footer>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+  <script src="ai-chat.js"></script>
+  <script src="hotline.js"></script>
+</body>
+</html>

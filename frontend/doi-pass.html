@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đổi mật khẩu | Lunihome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span><i class="fa-solid fa-truck-fast"></i> Giao hàng toàn quốc</span><span><i class="fa-solid fa-shield-heart"></i> Sản phẩm chính hãng</span></div><div class="topbar-right"><span><i class="fa-solid fa-phone"></i> 0901 234 567</span><span>Hỗ trợ 08:00 - 21:00</span></div></div></div>
+  <header class="header"><div class="container header-main"><a class="logo" href="index.html"><img src="logo.png" alt="Lunihome" class="logo-img"></a><div class="search-box"><form id="searchForm" action="tim-kiem.html" method="get"><input type="search" name="q" id="searchInput" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm"><button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button></form></div><div class="header-actions"><a class="action-link" href="gio-hang.html" title="Giỏ hàng"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span></a><div class="account-wrap" id="accountWrap"><button class="action-link" id="accountBtn" type="button" aria-expanded="false" title="Tài khoản"><i class="fa-regular fa-user"></i></button><div class="account-menu"><a href="dang-nhap.html"><i class="fa-solid fa-right-to-bracket"></i>Đăng nhập</a><a href="dang-ky.html"><i class="fa-solid fa-user-plus"></i>Đăng ký</a><a href="lich-su-don-hang.html"><i class="fa-solid fa-receipt"></i>Lịch sử đơn hàng</a><a href="yeu-thich.html"><i class="fa-regular fa-heart"></i>Sản phẩm yêu thích</a></div></div><div class="hello"><small>Xin chào</small><strong>Khách hàng</strong></div><button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button></div></div></header>
+  <nav class="nav" id="mainNav"><div class="container nav-inner"><div class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></div><div class="nav-item"><a class="nav-link" href="san-pham.html">Sản phẩm</a></div><div class="nav-item"><a class="nav-link" href="#" data-mobile-dropdown>Danh mục <i class="fa-solid fa-chevron-down"></i></a><div class="dropdown"><a href="danh-muc.html?slug=den-tran">Đèn trần</a><a href="danh-muc.html?slug=den-tha">Đèn thả</a><a href="danh-muc.html?slug=den-ban">Đèn bàn</a><a href="danh-muc.html?slug=den-tuong">Đèn tường</a><a href="danh-muc.html?slug=den-ngu">Đèn ngủ</a><a href="danh-muc.html?slug=den-decor">Đèn decor</a></div></div></div></nav>
+  <main>
+    <div class="container section">
+      <div class="auth-wrap" style="grid-template-columns: 0.9fr 1.1fr;">
+        <aside class="auth-side">
+          <div class="brand-box"><a href="index.html"><img src="logo.png" alt="Lunihome" class="logo-img" style="height:56px"></a></div>
+          <h2>Bảo mật tài khoản</h2>
+          <p style="color:var(--muted);margin-top:8px">Đổi mật khẩu thường xuyên giúp tài khoản của bạn luôn an toàn khi thanh toán và theo dõi đơn hàng.</p>
+          <div class="benefits">
+            <div class="benefit"><i class="fa-solid fa-lock"></i><div><strong>Mật khẩu mạnh</strong><p>Ít nhất 8 ký tự, có chữ, số, ký hiệu.</p></div></div>
+            <div class="benefit"><i class="fa-solid fa-shield-halved"></i><div><strong>Hạn chế truy cập trái phép</strong><p>Không chia sẻ mật khẩu cho bất kỳ ai.</p></div></div>
+          </div>
+        </aside>
+        <div class="auth-card">
+          <h1>Đổi mật khẩu</h1>
+          <p class="subtext">Bạn cần đăng nhập trước khi thực hiện đổi mật khẩu.</p>
+          <form>
+            <div class="form-control"><label>Email</label><input class="input-field" type="email" value="customer@lunihome.vn" readonly></div>
+            <div class="form-control"><label>Mật khẩu cũ</label><input class="input-field" type="password" placeholder="Nhập mật khẩu cũ"></div>
+            <div class="form-control"><label>Mật khẩu mới</label><input class="input-field" type="password" placeholder="Nhập mật khẩu mới"></div>
+            <div class="form-control"><label>Nhập lại mật khẩu mới</label><input class="input-field" type="password" placeholder="Nhập lại mật khẩu mới"></div>
+            <button class="btn btn-primary" type="submit" style="width:100%">Cập nhật mật khẩu</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer><div class="container footer-inner"><div><div class="footer-logo"><a href="index.html"><img src="logo.png" alt="Lunihome" class="footer-logo-img"></a></div><p class="footer-desc">Decorative Lighting • Thắp sáng không gian sống</p><div class="footer-contact"><div><i class="fa-solid fa-location-dot"></i> 123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh</div><div><i class="fa-solid fa-envelope"></i> hello@lunihome.vn</div><div><i class="fa-solid fa-phone"></i> 0901 234 567</div></div></div></div><div class="copyright">© 2026 Lunihome. All rights reserved.</div></footer>
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

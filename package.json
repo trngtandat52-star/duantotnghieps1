@@ -1,0 +1,13 @@
+{
+  "name": "lunihome-monorepo",
+  "version": "1.0.0",
+  "description": "LuniHome Project - Frontend, Admin, Backend",
+  "scripts": {
+    "frontend": "node frontend/serve.js",
+    "backend": "npm --prefix backend start",
+    "admin": "npm --prefix admin run dev",
+    "db:init": "npm --prefix backend run db:init"
+  },
+  "author": "LuniHome Dev Team",
+  "license": "ISC"
+}
